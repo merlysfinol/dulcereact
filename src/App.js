@@ -1,18 +1,23 @@
-import logo from './img/logo.png';
 import './App.css';
+import { NavBar } from './components/CardComponent';
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 function App() {
-  return (
+
+  return (    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+
+       <NavBar />
+
+      <header className="App-header">       
         <p>
           Dulce Fusión en React
-        </p>
+        </p>        
         <p>
-          Muy pronto....
+          En Construcción....
         </p>
       </header>
+      
     </div>
   );
 }
