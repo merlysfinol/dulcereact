@@ -13,7 +13,7 @@ function ItemListContainer() {
 
     return (
     <div className="container mt-4">
-       <Cards imagen={imagen} titulo={"Arreglo1"} descripcion={"Texto Descripción"} precio={"15000"} stock={"5"} inicial={"1"}/>
+       <Cards imagen={imagen} titulo={"Arreglo1"} descripcion={"Texto Descripción"} precio={15000} stock={5} inicial={1}/>
     </div>
     ) 
 }

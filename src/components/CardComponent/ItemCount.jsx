@@ -12,9 +12,9 @@ function ItemCount({inicial, stock} ) {
 
     const unaVariable = (x) => setVariable(variable+x);
    
-    variable = parseInt(variable < 1 ? variable+1 : variable)
+    variable = variable < 1 ? variable+1 : variable
     
-    variable = parseInt(variable > stock ? variable-1 : variable)
+    variable = variable > stock ? variable-1 : variable
     
     let bloqueoBoton = stock <= 0 ? true : false   
     
