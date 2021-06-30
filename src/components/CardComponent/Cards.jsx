@@ -1,8 +1,8 @@
 import React from "react"
 import { Card } from "react-bootstrap"
-import { Button } from "react-bootstrap"
+import ItemCount from "./ItemCount"
 
-function Cards({imagen, titulo, descripcion, precio}) {
+function Cards({imagen, titulo, descripcion, precio, stock, inicial}) {
     return (
         <Card style={{ width: '15rem' }}>
             <Card.Img variant="top" src={imagen} />
@@ -14,8 +14,7 @@ function Cards({imagen, titulo, descripcion, precio}) {
                 <Card.Text>
                 {precio}
                 </Card.Text>
-                <Button variant="primary mr-2">Agregar</Button>
-                <Button variant="primary ml-2">Comprar</Button>
+              <ItemCount stock={stock} inicial={inicial} />
             </Card.Body>
         </Card>
     )

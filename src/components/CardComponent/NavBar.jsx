@@ -14,7 +14,7 @@ function NavBar() {
     return(
      <>    
     <Navbar bg="light" expand="lg">
-        <a class="navbar-brand" href="/"><img src={logo} className="App-logo" alt=""/></a> 
+        <a className="navbar-brand" href="/"><img src={logo} className="App-logo" alt=""/></a> 
         <Navbar.Brand href="https://www.instagram.com/dulcefusion.chile/?hl=es-la" target="_blank"><FontAwesomeIcon icon={['fab', 'instagram']}  size="lg"/></Navbar.Brand>
         <Navbar.Brand href="https://www.facebook.com/profile.php?id=100063530833892" target="_blank"><FontAwesomeIcon icon={['fab', 'facebook']}  size="lg"/></Navbar.Brand>
         <Navbar.Brand href="https://github.com/merlysfinol" target="_blank"><FontAwesomeIcon icon={['fab', 'github-alt']}  size="lg"/></Navbar.Brand>
