@@ -1,21 +1,28 @@
 import React from "react"
 import { Card } from "react-bootstrap"
+import { ListGroup } from "react-bootstrap"
 import ItemCount from "./ItemCount"
+import '../../App.css';
 
-function Cards({imagen, titulo, descripcion, precio, stock, inicial}) {
+function Cards({imagen, titulo, precio, stock, inicial}) {
     return (
-        <Card style={{ width: '15rem' }}>
-            <Card.Img variant="top" src={imagen} />
-            <Card.Body className="text-dark">
-                <Card.Title>{titulo}</Card.Title>
+        <Card  
+        border='primary'
+        key='1'
+        text='dark'
+        style={{ width: '18rem' }}
+        className="mb-2 mt-2"               
+        >
+            <Card.Img variant="top" src={imagen} height="250px" />
+            <ListGroup.Item className="p-1">          
+                <Card.Header as="h6" className="p-2">
+                    {titulo}
+                </Card.Header>                
                 <Card.Text>
-                {descripcion}
+                    Precio de: ${precio}
                 </Card.Text>
-                <Card.Text>
-                {precio}
-                </Card.Text>
-              <ItemCount stock={stock} inicial={inicial} />
-            </Card.Body>
+              <ItemCount stock={stock} inicial={inicial} />         
+            </ListGroup.Item> 
         </Card>
     )
 }
