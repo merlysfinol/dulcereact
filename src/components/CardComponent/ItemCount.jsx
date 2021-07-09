@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Button } from "react-bootstrap"
 
 function ItemCount({inicial, stock} ) {
 
-    let [variable, setVariable]  = useState(inicial)
-
-    useEffect(() => {        
-        return () =>{
-          }               
-    }, [])
-
+    let [variable, setVariable]  = useState(inicial) 
+    
     const unaVariable = (x) => setVariable(variable+x);
    
     variable = variable < 1 ? variable+1 : variable
     
     variable = variable > stock ? variable-1 : variable
     
-    let bloqueoBoton = stock <= 0 ? true : false   
+    let bloqueoBoton = stock <= 0 ? true : false
     
     return (
         <div>
@@ -24,7 +19,9 @@ function ItemCount({inicial, stock} ) {
             {variable}
             <Button variant="outline-success ml-2" onClick={() => unaVariable(+1)}>+</Button>
             <p></p>
-            <Button variant="primary" disabled={bloqueoBoton}>Agregar</Button>
+            <Button variant="primary" disabled={bloqueoBoton}  >Agregar al Carrito</Button>     
+            <p></p>
+            <Button variant="primary" disabled={bloqueoBoton}  >Compra Directa</Button>    
        </div>
     )
 }

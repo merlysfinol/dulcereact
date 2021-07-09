@@ -22,7 +22,7 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
 
             <Nav className="mr-auto texto">
-            <Nav.Link href="#link">Inicio</Nav.Link>     
+            <Nav.Link href="/">Inicio</Nav.Link>     
             <NavDropdown title="Nosotros" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Sobre Nosotros</NavDropdown.Item>
                 <NavDropdown.Divider />
@@ -33,7 +33,7 @@ function NavBar() {
                 <NavDropdown.Item href="#action/3.1">Arreglos</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Chocoramos</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Desayunos</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Cajas</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Cajas Sorpresas</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Lo Ultimo</NavDropdown.Item>
             </NavDropdown>   
