@@ -21,7 +21,7 @@ function ItemListContainer() {
                 <Row className="justify-content-center">
                     {listadoProductos.map(producto => {
                         return(    
-                            <Col className="col-auto" key={producto.id}>
+                            <Col className="col-auto card-min" key={producto.id}>
                                 <Link to={"/item/"+producto.id } ><Cards  imagen={producto.thumbnail} titulo={producto.title} precio={producto.price} stock={producto.available_quantity} inicial={1}/></Link>
                             </Col> 
                                 )})

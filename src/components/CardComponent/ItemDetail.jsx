@@ -1,36 +1,9 @@
-import {React, useEffect, useState} from "react"
+import {React} from "react"
 import { Card, Row, Col, Container, ListGroup } from "react-bootstrap"
 import ItemCount from "./ItemCount"
-import { useParams } from 'react-router-dom'
 
-function ItemDetail() {
-  const [producto, setProducto] = useState([])
-  const [vendedor, setVendedor] = useState([])
-  const {id} = useParams()  
+function ItemDetail({producto, vendedor}) {  
  
-  useEffect(() => {   
-      
-      const item = "https://api.mercadolibre.com/items/"+id  
-      const seller = producto.seller_id ?  "https://api.mercadolibre.com/users/"+producto.seller_id:null
-
-      async function obtengoProducto() {
-        const respuesta = await fetch(item)
-        const datos = await respuesta.json()
-        setProducto(datos) 
-      
-            async function obtengoSeller() {
-              const respuesta2 = await fetch(seller)
-              const datos2 = await respuesta2.json()
-              setVendedor(datos2)          
-            }    
-            seller ? obtengoSeller():console.log("No hay vendedor")
-    }  
-      obtengoProducto() 
-               
-   }, [id, producto.seller_id])
-
-   if (producto.attributes && vendedor.seller_reputation){
-
     return (
         <Container  className="p-4">           
          
@@ -95,12 +68,7 @@ function ItemDetail() {
           
        
         </Container>       
-    )}else{
-      return(
-        <div className="loading show">
-          <div className="spin"></div>
-        </div>)
-    }
+    )
 }
 
 export default ItemDetail

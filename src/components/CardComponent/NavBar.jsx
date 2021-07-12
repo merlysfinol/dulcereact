@@ -9,8 +9,9 @@ import '../../fontawesome';
 import Button from 'react-bootstrap/Button';
 import logo from '../../img/logo.png';
 import CartWidget from './CartWidget';
+import Categorias from '../../utils/funciones/Categorias'
 
-function NavBar() {
+function NavBar() {    
     return(
      <>    
     <Navbar bg="light" expand="lg">
@@ -24,20 +25,19 @@ function NavBar() {
             <Nav className="mr-auto texto">
             <Nav.Link href="/">Inicio</Nav.Link>     
             <NavDropdown title="Nosotros" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Sobre Nosotros</NavDropdown.Item>
+                <NavDropdown.Item href="/somos">Sobre Nosotros</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2">Repartos y Envíos</NavDropdown.Item>
+                <NavDropdown.Item href="/envios">Repartos y Envíos</NavDropdown.Item>
             </NavDropdown>        
            
-            <NavDropdown title="Tienda" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Arreglos</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Chocoramos</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Desayunos</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Cajas Sorpresas</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Lo Ultimo</NavDropdown.Item>
-            </NavDropdown>   
-            <Nav.Link href="#link">Contactos</Nav.Link>
+            <NavDropdown title="Categorias" id="basic-nav-dropdown">
+                {Categorias().map(cat =>{
+                    return(
+                    <NavDropdown.Item key={cat.id} href={cat.url}>{cat.name}</NavDropdown.Item>
+                    )})
+                }
+            </NavDropdown>     
+            <Nav.Link href="/contacto">Contactos</Nav.Link>
             </Nav>        
             
             < CartWidget/>
