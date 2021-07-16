@@ -2,24 +2,30 @@ import React from "react"
 import { Card, ListGroup } from "react-bootstrap"
 import ItemCount from "./ItemCount"
 import '../../App.css';
+import { Link } from 'react-router-dom'
 
-function Cards({imagen, titulo, precio, stock, inicial}) {
+function Cards({producto, imagen, titulo, precio, stock, inicial}) {
     return (
         <Card  
         border='primary'
         text='dark'
         style={{ width: '18rem' }}
         className="mb-2 mt-2"               
-        >
-            <Card.Img variant="top" src={imagen} height="250px" />
-            <ListGroup.Item className="p-1">          
+        >   
+            <Link to={"/item/"+producto } >
+                <Card.Img variant="top" src={imagen} height="250px" />
+            </Link>    
+         <ListGroup.Item className="p-1">
+            <Link to={"/item/"+producto } >         
                 <Card.Header className="p-2">
                     {titulo}
-                </Card.Header>                
+                </Card.Header>
+            </Link>                        
                 <Card.Text>
                     Precio de: ${precio}
                 </Card.Text>
-              <ItemCount stock={stock} inicial={inicial} />         
+       
+              <ItemCount stock={stock} inicial={inicial} count={false}/>         
             </ListGroup.Item> 
         </Card>
     )

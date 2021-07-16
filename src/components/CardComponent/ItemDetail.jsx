@@ -3,7 +3,7 @@ import { Card, Row, Col, Container, ListGroup } from "react-bootstrap"
 import ItemCount from "./ItemCount"
 
 function ItemDetail({producto, vendedor}) {  
- 
+
     return (
         <Container  className="p-4">           
          
@@ -26,7 +26,7 @@ function ItemDetail({producto, vendedor}) {
                 <Card.Text>
                     Precio de: ${producto.price}
                 </Card.Text>
-              <ItemCount stock={producto.available_quantity} inicial={1} />         
+              <ItemCount product={producto.available_quantity} inicial={1} count={true}/>         
             </ListGroup.Item> 
             </Col>
           </Row>

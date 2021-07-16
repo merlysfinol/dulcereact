@@ -9,6 +9,7 @@ import ItemDetailContainer from './components/CardComponent/ItemDetailContainer'
 import SomosContainer from './components/CardComponent/SomosContainer';
 import EnviosContainer from './components/CardComponent/EnviosContainer';
 import ContactoContainer from './components/CardComponent/ContactoContainer';
+import Cart from './components/CardComponent/Cart';
 import SliderShow from './components/CardComponent/SliderShow';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
@@ -23,22 +24,25 @@ function App() {
           <SliderShow />          
           <ItemListContainer />
           </Route>
-          <Route path={"/item/:id"}>
+          <Route exact path={"/item/:id"}>
           <ItemDetailContainer />
           </Route>
-          <Route path={"/cat/:id"}>
+          <Route exact path={"/cat/:id"}>
           <CategoryContainer />
           </Route>
-          <Route path={"/somos"}>
+          <Route exact path={"/somos"}>
           <SomosContainer />
           </Route>
-          <Route path={"/envios"}>
+          <Route exact path={"/envios"}>
           <EnviosContainer />
           </Route>
-          <Route path={"/contacto"}>
+          <Route exact path={"/contacto"}>
           <ContactoContainer />
           </Route>
-          <Route path={"*"} to = {"/"}/>
+          <Route exact path={"/cart"}>
+          <Cart />
+          </Route>
+          <Route exact path={"*"} to = {"/"}/>
         </Switch>
         <Footer />
       </BrowserRouter>

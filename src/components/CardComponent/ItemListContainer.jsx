@@ -1,7 +1,6 @@
 import {React, useState, useEffect} from "react"
 import { Row, Col, Container } from "react-bootstrap"
 import Cards from "./Cards"
-import { Link } from 'react-router-dom'
 
 function ItemListContainer() {
     const [listadoProductos, setListadoProductos] = useState([])
@@ -22,7 +21,7 @@ function ItemListContainer() {
                     {listadoProductos.map(producto => {
                         return(    
                             <Col className="col-auto card-min" key={producto.id}>
-                                <Link to={"/item/"+producto.id } ><Cards  imagen={producto.thumbnail} titulo={producto.title} precio={producto.price} stock={producto.available_quantity} inicial={1}/></Link>
+                                <Cards  producto={producto.id} imagen={producto.thumbnail} titulo={producto.title} precio={producto.price} stock={producto.available_quantity} inicial={1}/>
                             </Col> 
                                 )})
                     }

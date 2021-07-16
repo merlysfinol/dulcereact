@@ -1,6 +1,6 @@
 import {React, useEffect, useState } from 'react'
 import { Row, Col, Container } from "react-bootstrap"
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Cards from "./Cards"
 
 function CategoryContainer() {
@@ -27,7 +27,7 @@ function CategoryContainer() {
             {categoria.map(producto => {
                 return(    
                     <Col className="col-auto card-min" key={producto.id}>
-                        <Link to={"/item/"+producto.id } ><Cards imagen={producto.thumbnail} titulo={producto.title} precio={producto.price} stock={producto.available_quantity} inicial={1}/></Link>
+                        <Cards producto={producto.id} imagen={producto.thumbnail} titulo={producto.title} precio={producto.price} stock={producto.available_quantity} inicial={1}/>
                     </Col> 
                         )})
             }
