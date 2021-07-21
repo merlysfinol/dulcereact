@@ -26,7 +26,7 @@ function ItemDetail({producto, vendedor}) {
                 <Card.Text>
                     Precio de: ${producto.price}
                 </Card.Text>
-              <ItemCount product={producto.available_quantity} inicial={1} count={true}/>         
+              <ItemCount id={producto.id} product={producto.available_quantity} inicial={1} count={true} productoTitulo={producto.title} productoPrecio={producto.price}/>         
             </ListGroup.Item> 
             </Col>
           </Row>

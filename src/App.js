@@ -12,11 +12,13 @@ import ContactoContainer from './components/CardComponent/ContactoContainer';
 import Cart from './components/CardComponent/Cart';
 import SliderShow from './components/CardComponent/SliderShow';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { ShopProvider } from './context/ShopContext'
 
 function App() {
 
   return (    
     <div className="App">
+      <ShopProvider>
       <BrowserRouter>
       <NavBar />
         <Switch>
@@ -46,6 +48,7 @@ function App() {
         </Switch>
         <Footer />
       </BrowserRouter>
+    </ShopProvider>
     </div>
    
   );

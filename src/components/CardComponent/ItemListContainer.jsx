@@ -7,7 +7,7 @@ function ItemListContainer() {
        
     useEffect(() => {       
         async function obtengoProductos() {
-            const respuesta = await fetch("https://api.mercadolibre.com/sites/MLA/search?limit=20&q=arreglos")
+            const respuesta = await fetch("https://api.mercadolibre.com/sites/MLA/search?limit=10&q=arreglos")
             const datos = await respuesta.json()
             setListadoProductos(datos.results)           
             }           

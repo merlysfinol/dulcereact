@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Button } from "react-bootstrap"
 import ItemComponent from './ItemComponent'
+import { ShopContext } from '../../context/ShopContext'
+import { Link } from 'react-router-dom'
 
-function ItemCount( {product, inicial, count} ) {
-
-    console.log(inicial)
+function ItemCount( {id, product, inicial, count, productoTitulo, productoPrecio} ) {
     
-    const [cart, setCart] = useState([])
     const [isAdd, setIsAdd] = useState(false)
 
     let [variable, setVariable]  = useState(inicial) 
@@ -16,22 +15,23 @@ function ItemCount( {product, inicial, count} ) {
     variable = variable < 1 ? variable+1 : variable
     
     variable = variable > product ? variable-1 : variable
-    
-    let bloqueoBoton = product <= 0 ? true : false
 
-    function addCart(prod){
+    const CONTEXT = useContext(ShopContext)
 
-        setCart([...cart, prod])
-        setIsAdd(true)
-        console.log(cart)
+    function addCart(){
+
+        CONTEXT.agregaProd(id, productoTitulo,  variable, productoPrecio)
+        setIsAdd(false)
+
     }
    
     let contador = count ? <div><Button variant="outline-success mr-2" onClick={() => unaVariable(-1)}>-</Button>{variable}<Button variant="outline-success ml-2" onClick={() => unaVariable(+1)}>+</Button><p></p> </div>: <div></div> 
        return (
         <div>
             {contador}
-            {isAdd ? <Button variant="primary" disabled={bloqueoBoton} href="/cart" >Terminar Compra</Button>:
-                <ItemComponent addCart={addCart} />}     
+            {isAdd ? <Link to={"/cart"}><Button variant="primary" disabled={product <= 0} >Terminar Compra</Button></Link>:
+                <ItemComponent addCart={addCart} />}  
+                <p></p><Link to={"/cart"}><Button variant="primary" disabled={product <= 0} >Ir a Pagar</Button></Link>   
        </div>
     )
 }
