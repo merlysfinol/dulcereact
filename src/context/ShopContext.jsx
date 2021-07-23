@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react"
-
+import { getFirestore } from "../firebase"
 const ShopContext = createContext()
 
 function ShopProvider({children})  {
@@ -7,6 +7,7 @@ function ShopProvider({children})  {
     const [cart, setCart] = useState([])
     const [cantidad, setCantidad] = useState(0)
     const [total, setTotal] = useState()
+    //const [fireItems, setFireItems] = useState([])
 
     function agregaProd(id, producto, cantidad, precio ){
       
@@ -25,13 +26,14 @@ function ShopProvider({children})  {
        setCart([...prods, agregoProd])        
      
        }
+       totales()
     }
 
     const eliminaProd = (id) => {
 
         const nuevoCart = cart.filter(producto => producto.id !== id)
         setCart(nuevoCart)
-
+        totales()
     }
     
     function eliminaTodo(){
@@ -55,8 +57,17 @@ function ShopProvider({children})  {
 
    
     useEffect(() => {
-        totales()
-    })
+       
+        const DB = getFirestore();
+         const COLLETION = DB.collection('productos'); 
+         COLLETION.get().then(( response ) => {
+            response.docs.forEach((documento) => {console.log(documento.data())}) })
+            .catch((error) => {
+            console.log("Error buscando los items", error)})
+            .finally(() => {           
+            console.log('Fin de la promesa')})   
+            
+    }, [])
 
     return <ShopContext.Provider value={{ cart, cantidad, total, agregaProd, eliminaProd, eliminaTodo }}>
         {children}
