@@ -1,16 +1,25 @@
-import {React, useEffect, useState} from 'react'
+import {React, useEffect, useState, useContext} from 'react'
 import ItemDetail from './ItemDetail'
 import { useParams } from 'react-router-dom'
+import { ShopContext } from '../../context/ShopContext'
 
 function ItemDetailContainer() {
 
+  const CONTEXT = useContext(ShopContext)
+
     const [producto, setProducto] = useState([])
-    const [vendedor, setVendedor] = useState([])
+    //const [vendedor, setVendedor] = useState([])
     const {id} = useParams()  
    
-    useEffect(() => {   
+    useEffect(() => {      
+
+
+      const listadoProductos = CONTEXT.fireItems
+      const unProducto = listadoProductos.filter(producto => producto.id === id)
+      
+      setProducto(unProducto) 
         
-        const item = "https://api.mercadolibre.com/items/"+id  
+        /*const item = "https://api.mercadolibre.com/items/"+id  
         const seller = producto.seller_id ?  "https://api.mercadolibre.com/users/"+producto.seller_id:null
   
         async function obtengoProducto() {
@@ -25,15 +34,14 @@ function ItemDetailContainer() {
               }    
               seller ? obtengoSeller():console.log("No hay vendedor")
       }  
-        obtengoProducto() 
+        obtengoProducto() */
                  
-     }, [id, producto.seller_id])
+     }, [CONTEXT.fireItems, id])
   
-     
-     if (producto.attributes && vendedor.seller_reputation){
+     if (producto[0]){
     return (
         <>
-            <ItemDetail producto={producto} vendedor={vendedor}/>
+            <ItemDetail producto={producto[0]} />
         </>
     )}else{
         return(

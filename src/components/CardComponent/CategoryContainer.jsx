@@ -1,25 +1,30 @@
-import {React, useEffect, useState } from 'react'
+import {React, useEffect, useState, useContext } from 'react'
 import { Row, Col, Container } from "react-bootstrap"
 import { useParams } from 'react-router-dom'
 import Cards from "./Cards"
+import { ShopContext } from '../../context/ShopContext'
 
-function CategoryContainer() {
+function CategoryContainer() {    
     const [categoria, setCategoria] = useState([])
-    const {id} = useParams() 
+    const {cat} = useParams() 
+    const CONTEXT = useContext(ShopContext)
 
     useEffect(() => {   
-        
-        const item = "https://api.mercadolibre.com/sites/MLA/search?category="+id          
+     
+    const listadoProductos = CONTEXT.fireItems
+      const filtradoCat = listadoProductos.filter(producto => producto.categoria === cat)
+      setCategoria(filtradoCat)
+      
+        /*const item = "https://api.mercadolibre.com/sites/MLA/search?category="+id          
   
         async function obtengoCategoria() {
           const respuesta = await fetch(item)
           const datos = await respuesta.json()
           setCategoria(datos.results)  
       }  
-        obtengoCategoria() 
+        obtengoCategoria() */
                  
-     }, [id])
-  
+     }, [CONTEXT.fireItems, cat])
 
     return (
         <Container fluid className>
@@ -27,7 +32,7 @@ function CategoryContainer() {
             {categoria.map(producto => {
                 return(    
                     <Col className="col-auto card-min" key={producto.id}>
-                        <Cards producto={producto.id} imagen={producto.thumbnail} titulo={producto.title} precio={producto.price} stock={producto.available_quantity} inicial={1}/>
+                        <Cards producto={producto.id} imagen={producto.imagen} titulo={producto.title} precio={producto.price} stock={producto.stock} inicial={1}/>
                     </Col> 
                         )})
             }

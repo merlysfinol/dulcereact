@@ -4,7 +4,6 @@ import Card from 'react-bootstrap/Card'
 
 function SomosContainer() {
     return (
-        <>
         <Card className="bg-white text-black">
         <Card.Img variant="top" src={nosotros} alt="Card image" />
         <Card.Body>
@@ -22,8 +21,7 @@ function SomosContainer() {
             <p>Nuestra Misión: Regalar emociones a miles de personas con nuestros regalos</p>
             </Card.Text>
         </Card.Body>
-        </Card>       
-        </>       
+        </Card>   
     )
 }
 

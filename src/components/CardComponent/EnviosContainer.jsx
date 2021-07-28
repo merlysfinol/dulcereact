@@ -4,7 +4,6 @@ import {Card, Table} from 'react-bootstrap'
 
 function EnviosContainer() {
     return (
-        <>
         <Card className="bg-white text-black">
         <Card.Img variant="top" src={repartos} alt="Repartos y Envios" />
         <Card.Body>
@@ -69,8 +68,7 @@ function EnviosContainer() {
             NOTA IMPORTANTE: Hacemos envíos de 10am a 6pm sin hora especifica de entrega
             </Card>
         </Card.Body>
-        </Card>       
-        </> 
+        </Card>   
     ) 
        
 }

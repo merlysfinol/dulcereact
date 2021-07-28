@@ -25,7 +25,7 @@ function Cards({producto, imagen, titulo, precio, stock, inicial}) {
                     Precio de: ${precio}
                 </Card.Text>
        
-              <ItemCount id={producto} product={stock} inicial={inicial} count={false} productoTitulo={titulo} productoPrecio={precio}/>         
+              <ItemCount id={producto} stock={stock} inicial={inicial} count={false} productoTitulo={titulo} productoPrecio={precio}/>         
             </ListGroup.Item> 
         </Card>
     )

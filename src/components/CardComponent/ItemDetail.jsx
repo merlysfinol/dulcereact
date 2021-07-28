@@ -2,14 +2,14 @@ import {React} from "react"
 import { Card, Row, Col, Container, ListGroup } from "react-bootstrap"
 import ItemCount from "./ItemCount"
 
-function ItemDetail({producto, vendedor}) {  
+function ItemDetail({producto}) {  
 
     return (
         <Container  className="p-4">           
          
               <Row>
                   <Col xs={12} md={8}>
-            <Card.Img variant="top" src={producto.thumbnail} height="500px" />
+            <Card.Img variant="top" src={producto.imagen} height="500px" />
             </Col>
             <Col xs={6} md={4}>
             <ListGroup.Item className="p-1">          
@@ -17,16 +17,15 @@ function ItemDetail({producto, vendedor}) {
                     {producto.title}
                 </Card.Header> 
                 <Card.Text>
-                    Condición: {producto.condition}
+                    Categoria: {producto.categoria}
                 </Card.Text>     
                 <Card.Text>
-                    Garantía: {producto.sale_terms[0].value_name}
-                </Card.Text>               
-                            
+                    Stock: {producto.stock}
+                </Card.Text>    
                 <Card.Text>
                     Precio de: ${producto.price}
                 </Card.Text>
-              <ItemCount id={producto.id} product={producto.available_quantity} inicial={1} count={true} productoTitulo={producto.title} productoPrecio={producto.price}/>         
+              <ItemCount id={producto.id} stock={producto.stock} inicial={1} count={true} productoTitulo={producto.title} productoPrecio={producto.price}/>         
             </ListGroup.Item> 
             </Col>
           </Row>
@@ -35,7 +34,7 @@ function ItemDetail({producto, vendedor}) {
             <Col xs={12} md={8}> 
             <ListGroup.Item className="p-2">     
              <Card.Title> Caracteristicas Principales</Card.Title>
-            {producto.attributes.map(atributo => {
+            {/*producto.attributes.map(atributo => {
                         return(  
                           <Row key={atributo.id}> 
                             <Col> 
@@ -50,23 +49,21 @@ function ItemDetail({producto, vendedor}) {
                             </Col>
                           </Row> 
                                 )})
-            }
+                        */}
             </ListGroup.Item>
             </Col>
             <Col xs={12} md={4}>
             <ListGroup.Item>
             <Card.Title>Información del Vendedor</Card.Title>
             <Card.Text>
-                    Vendedor: {vendedor.nickname}
+                    Vendedor: 
                 </Card.Text>
                 <Card.Text>
-                    Reputación: {vendedor.seller_reputation.power_seller_status}
+                    Reputación: 
                 </Card.Text>      
             </ListGroup.Item>
             </Col>          
-          </Row>
-          
-       
+          </Row>       
         </Container>       
     )
 }

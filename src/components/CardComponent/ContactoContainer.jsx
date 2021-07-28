@@ -5,8 +5,6 @@ import {Card} from 'react-bootstrap'
 
 function ContactoContainer() {
     return (
-        <div>
-            <>
             <Card className="bg-white text-black">
             <Card.Img variant="top" src={contacto} alt="Card image" />
             <Card.Body>
@@ -17,9 +15,7 @@ function ContactoContainer() {
               
                 </Card.Text>
             </Card.Body>
-            </Card>       
-        </>        
-        </div>
+            </Card>  
     )
 }
 

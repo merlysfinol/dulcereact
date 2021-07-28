@@ -2,19 +2,15 @@ import "./style.css";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../fontawesome';
-import Button from 'react-bootstrap/Button';
 import logo from '../../img/logo.png';
 import CartWidget from './CartWidget';
 import Categorias from '../../utils/funciones/Categorias'
 import { Link } from 'react-router-dom'
 
 function NavBar() {    
-    return(
-     <>    
+    return(    
     <Navbar bg="light" expand="lg">
         <Link to={"/"} className="navbar-brand"><img src={logo} className="App-logo" alt=""/></Link>
         <Navbar.Brand href="https://www.instagram.com/dulcefusion.chile/?hl=es-la" target="_blank"><FontAwesomeIcon icon={['fab', 'instagram']}  size="lg"/></Navbar.Brand>
@@ -24,37 +20,27 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
 
             <Nav className="mr-auto texto">
-            <Nav.Link ><Link to={"/"}>Inicio</Link></Nav.Link>     
+            <Nav.Link  href="/">Inicio</Nav.Link>     
             <NavDropdown title="Nosotros" id="basic-nav-dropdown">
-                <NavDropdown.Item ><Link to={"/somos"}>Sobre Nosotros</Link></NavDropdown.Item>
+                <NavDropdown.Item href="/somos">Sobre Nosotros</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item ><Link to={"/envios"}>Repartos y Envíos</Link></NavDropdown.Item>
-            </NavDropdown>        
+                <NavDropdown.Item href="/envios">Repartos y Envíos</NavDropdown.Item>
+            </NavDropdown>       
            
             <NavDropdown title="Categorias" id="basic-nav-dropdown">
                 {Categorias().map(cat =>{
                     return(
-                    <NavDropdown.Item key={cat.id} ><Link to={cat.url}>{cat.name}</Link></NavDropdown.Item>
+                    <NavDropdown.Item key={cat.id} href={cat.url}>{cat.name}</NavDropdown.Item>
                     )})
                 }
             </NavDropdown>     
-            <Nav.Link ><Link to={"/contacto"}>Contactos</Link></Nav.Link>
-            </Nav>        
-            
-            < CartWidget/>
+            <Nav.Link href="/contacto">Contactos</Nav.Link>
+            </Nav> 
 
-            <Nav className="justify-content-end"> 
-           
-            <Form inline>
-                <FormControl type="text" placeholder="Buscar" className="mr-sm-2" />
-                <Button variant="outline-success">Buscar</Button>
-            </Form>
-          
+            < CartWidget/>
             
-             </Nav>
         </Navbar.Collapse>
-    </Navbar>
-     </>      
+    </Navbar>   
     )
 }
 
