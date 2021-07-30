@@ -8,6 +8,8 @@ function ShopProvider({children})  {
     const [cantidad, setCantidad] = useState(0)
     const [total, setTotal] = useState()
     const [fireItems, setFireItems] = useState([])
+    const [pvGenerado, setPvGenerado] = useState([])
+    //const [obtenerPedido, setObtenerPedido] = useState([])
   
     const agregaProd = (id, producto, cantidad, precio ) => {
         
@@ -28,12 +30,12 @@ function ShopProvider({children})  {
         totales()
     }
     
-    function eliminaTodo(){
+    const eliminaTodo = () => {
         setCart([])
         setCantidad(0)
     }
 
-    function totales(){
+    const totales = () => {
         
         var totalPrecio = 0
         const sumaPrecios = cart.map ( precioUni => precioUni.precio * precioUni.cantidad)
@@ -43,7 +45,39 @@ function ShopProvider({children})  {
         const cantidadTotalFinal = cantidadTotal.reduce((prev, actual) => prev + actual, 0)
         setCantidad(cantidadTotalFinal)
     }    
-       
+    
+    const subirPedido = async (pedido) => {
+        const DB = getFirestore()
+        const PEDIDO = DB.collection('pedidos')
+        const pedidoSubido = await PEDIDO.add(pedido)
+        setPvGenerado(pedidoSubido)                 
+    }
+   
+    const obtenerFecha = (separador) => {
+
+        let nuevafecha = new Date()
+        let dia = nuevafecha.getDate();
+        let mes = nuevafecha.getMonth() + 1;
+        let ano = nuevafecha.getFullYear();
+        let hora = nuevafecha.getHours()
+        let min = nuevafecha.getMinutes()
+        
+        return `${dia}${separador}${mes<10?`0${mes}`:`${mes}`}${separador}${ano} ${hora}:${min}`
+    }
+
+   
+    const getPedido = async (id) => {
+        if (id){
+
+            const DB = getFirestore()
+            const PEDIDOS = DB.collection('pedidos').where('id','==',id)
+            const response = await PEDIDOS.get()
+            return response
+        }
+                  
+     }  
+     
+    
     useEffect(() => {
     const getProductos = async () => {
                 const DB = getFirestore()
@@ -59,7 +93,9 @@ function ShopProvider({children})  {
 
     useEffect(() => {totales()})
 
-    return <ShopContext.Provider value={{ cart, cantidad, total, fireItems,  agregaProd, eliminaProd, eliminaTodo }}>
+    
+
+    return <ShopContext.Provider value={{ cart, cantidad, total, fireItems, pvGenerado, getPedido, obtenerFecha, subirPedido, agregaProd, eliminaProd, eliminaTodo }}>
         {children}
     </ShopContext.Provider>
 }

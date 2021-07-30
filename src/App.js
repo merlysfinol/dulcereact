@@ -13,6 +13,7 @@ import Cart from './components/CardComponent/Cart';
 import SliderShow from './components/CardComponent/SliderShow';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { ShopProvider } from './context/ShopContext'
+import { PedidoContainer } from './components/CardComponent/PedidoContainer';
 
 function App() {
 
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route exact path={"/cart"}>
           <Cart />
+          </Route>
+          <Route exact path={"/pedido"}>
+          <PedidoContainer />
           </Route>
           <Route exact path={"*"} to = {"/"}/>
         </Switch>

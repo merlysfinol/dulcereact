@@ -19,23 +19,23 @@ function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
 
-            <Nav className="mr-auto texto">
-            <Nav.Link  href="/">Inicio</Nav.Link>     
+        <Nav className="mr-auto texto">
+            <Nav.Link ><Link to={"/"}>Inicio</Link></Nav.Link>     
             <NavDropdown title="Nosotros" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/somos">Sobre Nosotros</NavDropdown.Item>
+                <NavDropdown.Item ><Link to={"/somos"}>Sobre Nosotros</Link></NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/envios">Repartos y Envíos</NavDropdown.Item>
-            </NavDropdown>       
+                <NavDropdown.Item ><Link to={"/envios"}>Repartos y Envíos</Link></NavDropdown.Item>
+            </NavDropdown>        
            
             <NavDropdown title="Categorias" id="basic-nav-dropdown">
                 {Categorias().map(cat =>{
                     return(
-                    <NavDropdown.Item key={cat.id} href={cat.url}>{cat.name}</NavDropdown.Item>
+                    <NavDropdown.Item key={cat.id} ><Link to={cat.url}>{cat.name}</Link></NavDropdown.Item>
                     )})
                 }
             </NavDropdown>     
-            <Nav.Link href="/contacto">Contactos</Nav.Link>
-            </Nav> 
+            <Nav.Link ><Link to={"/contacto"}>Contactos</Link></Nav.Link>
+        </Nav>        
 
             < CartWidget/>
             
