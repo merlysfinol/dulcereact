@@ -3,8 +3,9 @@ import { getFirestore } from "../firebase"
 const ShopContext = createContext()
 
 function ShopProvider({children})  {
-
-    const [cart, setCart] = useState([])
+    const cat = JSON.parse(localStorage.getItem('userCart'))  
+    const localStore = cat ? cat : []
+    const [cart, setCart] = useState(localStore)
     const [cantidad, setCantidad] = useState(0)
     const [total, setTotal] = useState()
     const [fireItems, setFireItems] = useState([])
@@ -66,11 +67,11 @@ function ShopProvider({children})  {
     }
 
    
-    const getPedido = async (id) => {
-        if (id){
+    const getPedido = async (campo, valor) => {
+        if (valor){
 
             const DB = getFirestore()
-            const PEDIDOS = DB.collection('pedidos').where('id','==',id)
+            const PEDIDOS = DB.collection('pedidos').where(campo,'==',valor)
             const response = await PEDIDOS.get()
             return response
         }
@@ -91,7 +92,11 @@ function ShopProvider({children})  {
        getProductos()
     }, [])
 
-    useEffect(() => {totales()})
+    useEffect(() => {      
+        
+        localStorage.setItem( 'userCart' , JSON.stringify(cart))
+        totales()
+    })
 
     
 

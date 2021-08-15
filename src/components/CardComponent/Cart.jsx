@@ -1,13 +1,27 @@
 import React, { useContext, useState } from 'react'
-import { Modal, Table } from 'react-bootstrap';
-import { Button, Container, Row, Col, Form } from 'react-bootstrap';
+import { Button, Container, Row, Col, Form, Modal, Table } from 'react-bootstrap';
 import { ShopContext } from '../../context/ShopContext'
 import { Link } from 'react-router-dom'
 
 function Cart() { 
     const CONTEXT = useContext(ShopContext)
     const [form, setForm] = useState({nombre:'', email:'', telefono:'', direccion:''})
-     
+    const [email2, setEmail2] = useState('')
+
+    const verifEmailyCant = () => {
+
+    const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+    if (emailRegex.test(form.email)) {
+
+      if (CONTEXT.total===0 || email2 !== form.email){return true}else{return false}
+
+    } 
+
+     return true  
+
+    }
+       
     const articulos = CONTEXT.cantidad ? 
     <Modal.Body>
         <Table striped bordered hover variant="light">
@@ -42,8 +56,7 @@ function Cart() {
           <tbody>
                 <tr>
                   <td></td>
-                  <td colSpan="3"><Button variant="danger" onClick={() => CONTEXT.eliminaTodo()}>Eliminar Todo</Button></td>
-                  
+                  <td colSpan="3"><Button variant="danger" onClick={() => CONTEXT.eliminaTodo()}>Eliminar Todo</Button></td>                  
                   <td></td>
                 </tr>
               
@@ -66,27 +79,37 @@ function Cart() {
                   <Form.Text className="text-muted">
                     Coloca tu Nombre y Apellido
                   </Form.Text>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail" onInput={(event) => {
-                setForm({...form, direccion : event.target.value})
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicEmail" onInput={(event) => {
+                setForm({...form, email : event.target.value})
               }}>
                   <Form.Label>Dirección Email</Form.Label>
                   <Form.Control type="email" placeholder="Coloca email" />
                   <Form.Text className="text-muted">
                    Nunca compartiremos tu Email con nadie
                   </Form.Text>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicDireccion" onInput={(event) => {
-                setForm({...form, email : event.target.value})
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicDireccion" onInput={(event) => {
+                 setEmail2(event.target.value)
+              }}>
+                 <Form.Label>Repite Email</Form.Label>
+                  <Form.Control type="email" placeholder="Emails deben coincidir" />                  
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicDireccion" onInput={(event) => {
+                 setForm({...form, direccion : event.target.value})
               }}>
                   <Form.Label>Dirección</Form.Label>
                   <Form.Control type="text" placeholder="Coloca Dirección" />
                   <Form.Text className="text-muted">
                     Coloca tu Dirección
                   </Form.Text>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicTelefono" onInput={(event) => {
-                setForm({...form, telefono : event.target.value})
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicTelefono" onInput={(event) => {              
+                setForm({...form, telefono : event.target.value})          
                
               }} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
                   <Form.Label>Teléfono</Form.Label>
@@ -94,16 +117,18 @@ function Cart() {
                   <Form.Text className="text-muted">
                   Nunca compartiremos tu Teléfono con nadie
                   </Form.Text>
-                </Form.Group>               
+              </Form.Group>
+
               </Form>
               </Col>
               <Col sm={8}> {articulos}</Col>
             </Row> 
             <Link to={"/pedido"}>
-            <Button bb={5} variant="primary" onClick={() => {
+            <Button bb={5} variant="primary" disabled={verifEmailyCant()} onClick={() => {
               const pedido = { buyer: { ...form}, items: CONTEXT.cart, total: CONTEXT.total, fecha:CONTEXT.obtenerFecha('/')}
               //console.log(pedido)
               CONTEXT.subirPedido(pedido)
+              localStorage.removeItem('userCart');
               //CONTEXT.eliminaTodo()            
             }}>Crear Pedido
             </Button></Link> 

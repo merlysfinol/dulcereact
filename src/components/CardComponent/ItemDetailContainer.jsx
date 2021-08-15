@@ -45,8 +45,10 @@ function ItemDetailContainer() {
         </>
     )}else{
         return(
-          <div className="loading show">
-            <div className="spin"></div>
+          <div>
+            <br></br>
+            <div>Producto No Existe</div>
+            <br></br>
           </div>)
       }
 }
